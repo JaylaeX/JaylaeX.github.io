@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Roblox Key</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        .key-box {
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 20px;
+            color: #ff5555;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Here is your Roblox Key</h1>
+    <div class="key-box" id="key-box">Click the button to get your key</div>
+    <div class="timer" id="timer"></div>
+    <br>
+    <button onclick="generateKey()">Get My Key</button>
+
+    <script>
+        function generateKey() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let key = '';
+            for (let i = 0; i < 4; i++) key += characters.charAt(Math.floor(Math.random() * characters.length));
+            key += '-';
+            for (let i = 0; i < 4; i++) key += characters.charAt(Math.floor(Math.random() * characters.length));
+            document.getElementById('key-box').innerText = 'Your Key: ' + key;
+
+            let countdown = 600; // 10 minutes
+            let timerElement = document.getElementById('timer');
+
+            function updateTimer() {
+                let minutes = Math.floor(countdown / 60);
+                let seconds = countdown % 60;
+                timerElement.innerText = 'Expires in: ' + minutes + 'm ' + (seconds < 10 ? '0' : '') + seconds + 's';
+                countdown--;
+                if (countdown >= 0) {
+                    setTimeout(updateTimer, 1000);
+                } else {
+                    timerElement.innerText = 'Key expired.';
+                    document.getElementById('key-box').innerText = 'Click the button to get a new key';
+                }
+            }
+
+            updateTimer();
+        }
+    </script>
+</body>
+</html>
